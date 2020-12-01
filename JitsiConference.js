@@ -271,7 +271,6 @@ JitsiConference.resourceCreator = function(jid, isAuthenticatedUser) {
     let mucNickname;
 
 	mucNickname = Strophe.getNodeFromJid(jid); //Bizwell. nickname is loginID. by.jhhan
-
     /*if (isAuthenticatedUser) {
         // For authenticated users generate a random ID.
         mucNickname = RandomUtil.randomHexString(8).toLowerCase();
@@ -2424,6 +2423,15 @@ JitsiConference.prototype.isCallstatsEnabled = function() {
     return this.statistics.isCallstatsEnabled();
 };
 
+/**
+ * Finds the SSRC of a given track
+ *
+ * @param track
+ * @returns {number|undefined} the SSRC of the specificed track, otherwise undefined.
+ */
+JitsiConference.prototype.getSsrcByTrack = function(track) {
+    return track.isLocal() ? this.getActivePeerConnection()?.getLocalSSRC(track) : track.getSSRC();
+};
 
 /**
  * Handles track attached to container (Calls associateStreamWithVideoTag method
@@ -2442,7 +2450,7 @@ JitsiConference.prototype._onTrackAttach = function(track, container) {
             : this.jvbJingleSession && this.jvbJingleSession.peerconnection;
 
     if (isLocal) {
-        // Local tracks have SSRC stored on per peer connection basis
+        // Local tracks have SSRC stored on per peer connection basis.
         if (peerConnection) {
             ssrc = peerConnection.getLocalSSRC(track);
         }

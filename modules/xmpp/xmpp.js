@@ -148,7 +148,8 @@ export default class XMPP extends Listenable {
         this.caps.addFeature('urn:xmpp:jingle:apps:rtp:audio');
         this.caps.addFeature('urn:xmpp:jingle:apps:rtp:video');
 
-        if (!this.options.disableRtx) {
+        // Disable RTX on Firefox because of https://bugzilla.mozilla.org/show_bug.cgi?id=1668028.
+        if (!(this.options.disableRtx || browser.isFirefox())) {
             this.caps.addFeature('urn:ietf:rfc:4588');
         }
         if (this.options.enableOpusRed === true && browser.supportsAudioRed()) {
@@ -209,12 +210,8 @@ export default class XMPP extends Listenable {
             now);
 
         this.eventEmitter.emit(XMPPEvents.CONNECTION_STATUS_CHANGED, credentials, status, msg);
-        if (status === Strophe.Status.CONNECTED
-            || status === Strophe.Status.ATTACHED) {
-            if (this.options.useStunTurn
-                || (this.options.p2p && this.options.p2p.useStunTurn)) {
-                this.connection.jingle.getStunAndTurnCredentials();
-            }
+        if (status === Strophe.Status.CONNECTED || status === Strophe.Status.ATTACHED) {
+            this.connection.jingle.getStunAndTurnCredentials();
 
             logger.info(`My Jabber ID: ${this.connection.jid}`);
 

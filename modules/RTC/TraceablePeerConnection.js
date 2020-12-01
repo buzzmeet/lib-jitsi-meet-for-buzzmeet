@@ -215,8 +215,22 @@ export default function TraceablePeerConnection(
         this._peerMutedChanged);
     this.options = options;
 
+    // Make sure constraints is properly formatted in order to provide information about whether or not this
+    // connection is P2P to rtcstats.
+    const safeConstraints = constraints || {};
+
+    safeConstraints.optional = safeConstraints.optional || [];
+
+    // The `optional` parameter needs to be of type array, otherwise chrome will throw an error.
+    // Firefox and Safari just ignore it.
+    if (Array.isArray(safeConstraints.optional)) {
+        safeConstraints.optional.push({ rtcStatsSFUP2P: this.isP2P });
+    } else {
+        logger.warn('Optional param is not an array, rtcstats p2p data is omitted.');
+    }
+
     this.peerconnection
-        = new RTCUtils.RTCPeerConnectionType(iceConfig, constraints);
+        = new RTCUtils.RTCPeerConnectionType(iceConfig, safeConstraints);
 
     // The standard video bitrates are used in Unified plan when switching
     // between camera/desktop tracks on the same sender.
@@ -902,6 +916,13 @@ TraceablePeerConnection.prototype._createRemoteTrack = function(
 
     const existingTrack = remoteTracksMap.get(mediaType);
 
+    // Delete the existing track and create the new one because of a known bug on Safari.
+    // RTCPeerConnection.ontrack fires when a new remote track is added but MediaStream.onremovetrack doesn't so
+    // it needs to be removed whenever a new track is received for the same endpoint id.
+    if (existingTrack && browser.isSafari()) {
+        this._remoteTrackRemoved(existingTrack.getOriginalStream(), existingTrack.getTrack());
+    }
+
     if (existingTrack && existingTrack.getTrack() === track) {
         // Ignore duplicated event which can originate either from
         // 'onStreamAdded' or 'onTrackAdded'.
@@ -911,9 +932,7 @@ TraceablePeerConnection.prototype._createRemoteTrack = function(
 
         return;
     } else if (existingTrack) {
-        logger.error(
-            `${this} overwriting remote track for`
-                + `${ownerEndpointId} ${mediaType}`);
+        logger.error(`${this} overwriting remote track for ${ownerEndpointId} ${mediaType}`);
     }
 
     const remoteTrack
@@ -2167,8 +2186,13 @@ TraceablePeerConnection.prototype.setRemoteDescription = function(description) {
     if (browser.usesPlanB()) {
         // TODO the focus should squeze or explode the remote simulcast
         if (this.isSimulcastOn()) {
+            // Determine if "x-google-conference" needs to be added to the remote description.
+            // We need to add that flag for camera tracks always and for desktop tracks only when
+            // capScreenshareBitrate is disabled.
+            const enableConferenceFlag = !(this.options.capScreenshareBitrate && !hasCameraTrack(this));
+
             // eslint-disable-next-line no-param-reassign
-            description = this.simulcast.mungeRemoteDescription(description);
+            description = this.simulcast.mungeRemoteDescription(description, enableConferenceFlag);
             this.trace(
                 'setRemoteDescription::postTransform (simulcast)',
                 dumpSDP(description));
