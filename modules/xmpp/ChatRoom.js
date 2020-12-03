@@ -1025,10 +1025,6 @@ export default class ChatRoom extends Listenable {
 
             if (subjectText || subjectText === '') {
                 this.eventEmitter.emit(XMPPEvents.SUBJECT_CHANGED, subjectText);
-		//Bizwell. by.jhhan
-		try {
-			document.title = `${subjectText} | ${interfaceConfig.APP_NAME}`;
-		} catch (e) {}
                 logger.log(`Subject is changed to ${subjectText}`);
             }
         }

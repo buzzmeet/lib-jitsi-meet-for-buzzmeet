@@ -7,7 +7,9 @@
   "_phantomChildren": {},
   "_requested": {
     "type": "git",
-    "raw": "github:jitsi/lib-jitsi-meet#4980889b24716c383311aadd760d958f6ff58277",
+    "raw": "lib-jitsi-meet@github:jitsi/lib-jitsi-meet#4980889b24716c383311aadd760d958f6ff58277",
+    "name": "lib-jitsi-meet",
+    "escapedName": "lib-jitsi-meet",
     "rawSpec": "github:jitsi/lib-jitsi-meet#4980889b24716c383311aadd760d958f6ff58277",
     "saveSpec": "github:jitsi/lib-jitsi-meet#4980889b24716c383311aadd760d958f6ff58277",
     "fetchSpec": null,
@@ -17,12 +19,13 @@
     "/"
   ],
   "_resolved": "github:jitsi/lib-jitsi-meet#4980889b24716c383311aadd760d958f6ff58277",
-  "_spec": "github:jitsi/lib-jitsi-meet#4980889b24716c383311aadd760d958f6ff58277",
-  "_where": "D:\\jitsi-meet-jitsi-meet_5144",
+  "_spec": "lib-jitsi-meet@github:jitsi/lib-jitsi-meet#4980889b24716c383311aadd760d958f6ff58277",
+  "_where": "C:\\workspace\\lab\\meet\\jitsi-meet-2.0",
   "author": "",
   "bugs": {
     "url": "https://github.com/jitsi/lib-jitsi-meet/issues"
   },
+  "bundleDependencies": false,
   "dependencies": {
     "@jitsi/js-utils": "1.0.2",
     "@jitsi/sdp-interop": "1.0.3",
@@ -41,6 +44,7 @@
     "uuid": "8.1.0",
     "webrtc-adapter": "7.5.0"
   },
+  "deprecated": false,
   "description": "JS library for accessing Jitsi server side deployments",
   "devDependencies": {
     "@babel/core": "7.5.5",
