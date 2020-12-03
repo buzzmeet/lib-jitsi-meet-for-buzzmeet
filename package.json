@@ -1,34 +1,30 @@
 {
-  "_args": [
-    [
-      "github:jitsi/lib-jitsi-meet#f370cccdfba6f9190ecb4afc3d78552d9f3ad57c",
-      "C:\\workspace\\lab\\meet\\jitsi-meet"
-    ]
-  ],
-  "_from": "github:jitsi/lib-jitsi-meet#f370cccdfba6f9190ecb4afc3d78552d9f3ad57c",
-  "_id": "lib-jitsi-meet@github:jitsi/lib-jitsi-meet#f370cccdfba6f9190ecb4afc3d78552d9f3ad57c",
+  "_from": "github:jitsi/lib-jitsi-meet#4980889b24716c383311aadd760d958f6ff58277",
+  "_id": "lib-jitsi-meet@0.0.0",
   "_inBundle": false,
   "_integrity": "",
   "_location": "/lib-jitsi-meet",
   "_phantomChildren": {},
   "_requested": {
     "type": "git",
-    "raw": "github:jitsi/lib-jitsi-meet#f370cccdfba6f9190ecb4afc3d78552d9f3ad57c",
-    "rawSpec": "github:jitsi/lib-jitsi-meet#f370cccdfba6f9190ecb4afc3d78552d9f3ad57c",
-    "saveSpec": "github:jitsi/lib-jitsi-meet#f370cccdfba6f9190ecb4afc3d78552d9f3ad57c",
+    "raw": "github:jitsi/lib-jitsi-meet#4980889b24716c383311aadd760d958f6ff58277",
+    "rawSpec": "github:jitsi/lib-jitsi-meet#4980889b24716c383311aadd760d958f6ff58277",
+    "saveSpec": "github:jitsi/lib-jitsi-meet#4980889b24716c383311aadd760d958f6ff58277",
     "fetchSpec": null,
-    "gitCommittish": "f370cccdfba6f9190ecb4afc3d78552d9f3ad57c"
+    "gitCommittish": "4980889b24716c383311aadd760d958f6ff58277"
   },
   "_requiredBy": [
+    "#USER",
     "/"
   ],
-  "_resolved": "github:jitsi/lib-jitsi-meet#f370cccdfba6f9190ecb4afc3d78552d9f3ad57c",
-  "_spec": "github:jitsi/lib-jitsi-meet#f370cccdfba6f9190ecb4afc3d78552d9f3ad57c",
-  "_where": "C:\\workspace\\lab\\meet\\jitsi-meet",
+  "_resolved": "github:jitsi/lib-jitsi-meet#4980889b24716c383311aadd760d958f6ff58277",
+  "_spec": "github:jitsi/lib-jitsi-meet#4980889b24716c383311aadd760d958f6ff58277",
+  "_where": "D:\\jitsi-meet-jitsi-meet_5144",
   "author": "",
   "bugs": {
     "url": "https://github.com/jitsi/lib-jitsi-meet/issues"
   },
+  "bundleDependencies": false,
   "dependencies": {
     "@jitsi/js-utils": "1.0.2",
     "@jitsi/sdp-interop": "1.0.3",
@@ -47,6 +43,7 @@
     "uuid": "8.1.0",
     "webrtc-adapter": "7.5.0"
   },
+  "deprecated": false,
   "description": "JS library for accessing Jitsi server side deployments",
   "devDependencies": {
     "@babel/core": "7.5.5",
