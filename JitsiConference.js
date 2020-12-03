@@ -270,8 +270,8 @@ JitsiConference.prototype.constructor = JitsiConference;
 JitsiConference.resourceCreator = function(jid, isAuthenticatedUser) {
     let mucNickname;
 
-	mucNickname = Strophe.getNodeFromJid(jid); //Bizwell. nickname is loginID. by.jhhan
-    /*if (isAuthenticatedUser) {
+	//mucNickname = Strophe.getNodeFromJid(jid); //Bizwell. nickname is loginID. by.jhhan
+    if (isAuthenticatedUser) {
         // For authenticated users generate a random ID.
         mucNickname = RandomUtil.randomHexString(8).toLowerCase();
     } else {
@@ -288,7 +288,7 @@ JitsiConference.resourceCreator = function(jid, isAuthenticatedUser) {
         if (!re.test(mucNickname)) {
             mucNickname = RandomUtil.randomHexString(8).toLowerCase();
         }
-    }*/
+    }
 
     return mucNickname;
 };
