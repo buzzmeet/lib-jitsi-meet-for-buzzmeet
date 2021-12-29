@@ -416,9 +416,6 @@ export default function TraceablePeerConnection(
             });
         }, 1000);
     }
-    
-    //Bizwell. 원격제어 동작 P2P 메시징 이벤트 추가, LeeJx2, 2021.01.11
-    this.peerconnection.remoteControlDataChannel = this.peerconnection.createDataChannel('remoteControlDataChannel');
 
     logger.info(`Create new ${this}`);
 }
